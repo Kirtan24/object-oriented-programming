@@ -1,7 +1,10 @@
+from abc import ABC, abstractmethod
 class ProccessPayment:
+    @abstractmethod
     def proccess_payment(self):
         pass
 
+    @abstractmethod
     def verify_payment(self):
         pass
 
@@ -26,11 +29,11 @@ class PayPalAdapter(ProccessPayment):
 
 class StripePayment:
     def create_charge(self, st_request):
-        print(f"PayPal payment of {st_request['amount']} proccessed")
+        print(f"Stripe payment of {st_request['amount']} proccessed")
         return f"ST-{hash(str(st_request))}"[:10]
 
     def retrive_charge(self, st_id):
-        print(f"PayPal payment verified {st_id}")
+        print(f"Stripe payment verified {st_id}")
         return {"status": "succeeded", "id": st_id}
 
 class StripeAdapter(ProccessPayment):
